@@ -52,6 +52,11 @@ limitations under the License.
 ## Usage
 
 ```javascript
+import cnegf from 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-neg@deno/mod.js';
+```
+The previous example will load the latest bundled code from the deno branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/complex-float32-base-neg/tags). For example,
+
+```javascript
 import cnegf from 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-neg@v0.1.0-deno/mod.js';
 ```
 
@@ -101,7 +106,7 @@ out = cnegf( z );
 ```javascript
 import Complex64 from 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-ctor@deno/mod.js';
 import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-discrete-uniform@deno/mod.js';
-import cnegf from 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-neg@v0.1.0-deno/mod.js';
+import cnegf from 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-neg@deno/mod.js';
 
 function randomComplex() {
     var re = discreteUniform( -50, 50 );
