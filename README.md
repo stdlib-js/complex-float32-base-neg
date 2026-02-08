@@ -45,43 +45,32 @@ limitations under the License.
 
 <!-- Package usage documentation. -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/complex-float32-base-neg
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-cnegf = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-neg@umd/browser.js' )
-```
-The previous example will load the latest bundled code from the umd branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/complex-float32-base-neg/tags). For example,
-
-```javascript
-cnegf = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-neg@v0.1.0-umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var cnegf = require( 'path/to/vendor/umd/complex-float32-base-neg/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-neg@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.cnegf;
-})();
-</script>
+var cnegf = require( '@stdlib/complex-float32-base-neg' );
 ```
 
 #### cnegf( z )
@@ -127,15 +116,10 @@ out = cnegf( z );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-ctor@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-base-discrete-uniform@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-neg@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var Complex64 = require( '@stdlib/complex-float32-ctor' );
+var discreteUniform = require( '@stdlib/random-base-discrete-uniform' );
+var cnegf = require( '@stdlib/complex-float32-base-neg' );
 
 function randomComplex() {
     var re = discreteUniform( -50, 50 );
@@ -152,11 +136,6 @@ for ( i = 0; i < 100; i++ ) {
     o = cnegf( z );
     console.log( 'negate(%s) = %s', z.toString(), o.toString() );
 }
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -165,7 +144,113 @@ for ( i = 0; i < 100; i++ ) {
 
 <!-- C interface documentation. -->
 
+* * *
 
+<section class="c">
+
+## C APIs
+
+<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
+
+<section class="intro">
+
+</section>
+
+<!-- /.intro -->
+
+<!-- C usage documentation. -->
+
+<section class="usage">
+
+### Usage
+
+```c
+#include "stdlib/complex/float32/base/neg.h"
+```
+
+#### stdlib_base_complex64_neg( z )
+
+Negates a single-precision complex floating-point number.
+
+```c
+#include "stdlib/complex/float32/ctor.h"
+#include "stdlib/complex/float32/real.h"
+#include "stdlib/complex/float32/imag.h"
+
+stdlib_complex64_t z = stdlib_complex64( 3.0f, -2.0f );
+stdlib_complex64_t out = stdlib_base_complex64_neg( z );
+
+float re = stdlib_complex64_real( out );
+// returns -3.0f
+
+float im = stdlib_complex64_imag( out );
+// returns 2.0f
+```
+
+The function accepts the following arguments:
+
+-   **z**: `[in] stdlib_complex64_t` input value.
+
+```c
+stdlib_complex64_t stdlib_base_complex64_neg( const stdlib_complex64_t z );
+```
+
+</section>
+
+<!-- /.usage -->
+
+<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
+
+<section class="notes">
+
+</section>
+
+<!-- /.notes -->
+
+<!-- C API usage examples. -->
+
+<section class="examples">
+
+### Examples
+
+```c
+#include "stdlib/complex/float32/base/neg.h"
+#include "stdlib/complex/float32/ctor.h"
+#include "stdlib/complex/float32/reim.h"
+#include <stdio.h>
+
+int main( void ) {
+    const stdlib_complex64_t x[] = {
+        stdlib_complex64( 3.14f, 1.5f ),
+        stdlib_complex64( -3.14f, 1.5f ),
+        stdlib_complex64( 0.0f, -0.0f ),
+        stdlib_complex64( 0.0f/0.0f, 0.0f/0.0f )
+    };
+
+    stdlib_complex64_t v;
+    stdlib_complex64_t y;
+    float re;
+    float im;
+    int i;
+    for ( i = 0; i < 4; i++ ) {
+        v = x[ i ];
+        stdlib_complex64_reim( v, &re, &im );
+        printf( "z = %f + %fi\n", re, im );
+
+        y = stdlib_base_complex64_neg( v );
+        stdlib_complex64_reim( y, &re, &im );
+        printf( "cnegf(z) = %f + %fi\n", re, im );
+    }
+}
+```
+
+</section>
+
+<!-- /.examples -->
+
+</section>
+
+<!-- /.c -->
 
 <!-- Section to include cited references. If references are included, add a horizontal rule *before* the section. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
 
@@ -229,8 +314,8 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 [npm-image]: http://img.shields.io/npm/v/@stdlib/complex-float32-base-neg.svg
 [npm-url]: https://npmjs.org/package/@stdlib/complex-float32-base-neg
 
-[test-image]: https://github.com/stdlib-js/complex-float32-base-neg/actions/workflows/test.yml/badge.svg?branch=v0.1.0
-[test-url]: https://github.com/stdlib-js/complex-float32-base-neg/actions/workflows/test.yml?query=branch:v0.1.0
+[test-image]: https://github.com/stdlib-js/complex-float32-base-neg/actions/workflows/test.yml/badge.svg?branch=v0.1.1
+[test-url]: https://github.com/stdlib-js/complex-float32-base-neg/actions/workflows/test.yml?query=branch:v0.1.1
 
 [coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/complex-float32-base-neg/main.svg
 [coverage-url]: https://codecov.io/github/stdlib-js/complex-float32-base-neg?branch=main
@@ -264,9 +349,9 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 <!-- <related-links> -->
 
-[@stdlib/complex/float64/base/neg]: https://github.com/stdlib-js/complex-float64-base-neg/tree/umd
+[@stdlib/complex/float64/base/neg]: https://github.com/stdlib-js/complex-float64-base-neg
 
-[@stdlib/math/base/special/cabsf]: https://github.com/stdlib-js/math-base-special-cabsf/tree/umd
+[@stdlib/math/base/special/cabsf]: https://github.com/stdlib-js/math-base-special-cabsf
 
 <!-- </related-links> -->
 
