@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2023 The Stdlib Authors.
@@ -16,22 +16,17 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
 
-// MODULES //
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
 
-var realf = require( '@stdlib/complex-float32-real' );
-var imagf = require( '@stdlib/complex-float32-imag' );
-var Complex64 = require( '@stdlib/complex-float32-ctor' );
-
-
-// MAIN //
+import { Complex64 } from '@stdlib/types/complex';
 
 /**
 * Negates a single-precision complex floating-point number.
 *
-* @param {Complex64} z - complex number
-* @returns {Complex64} result
+* @param z - complex number
+* @returns result
 *
 * @example
 * var Complex64 = require( '@stdlib/complex-float32-ctor' );
@@ -57,11 +52,9 @@ var Complex64 = require( '@stdlib/complex-float32-ctor' );
 * var out = cnegf( z );
 * // returns <Complex64>[ NaN, NaN ]
 */
-function cnegf( z ) {
-	return new Complex64( -realf( z ), -imagf( z ) );
-}
+declare function cnegf( z: Complex64 ): Complex64;
 
 
 // EXPORTS //
 
-module.exports = cnegf;
+export = cnegf;
